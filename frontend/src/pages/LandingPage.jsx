@@ -6,7 +6,7 @@ const LandingPage = () => (
     <div className="mx-auto max-w-6xl">
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} className="premium-card p-8 text-center md:p-14">
         <p className="mb-2 text-sm uppercase tracking-[0.2em] text-brand-500">Team Task Manager</p>
-        <div className="mx-auto mb-4 h-14 w-14 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md ring-1 ring-slate-200/80 dark:border-slate-600 dark:bg-slate-800 dark:ring-slate-600/50">
+        <div className="mx-auto mb-4 h-14 w-14 overflow-hidden rounded-md border border-slate-200 bg-white shadow-md ring-1 ring-slate-200/80 dark:border-slate-600 dark:bg-slate-800 dark:ring-slate-600/50">
           <img src="/logo.png" alt="TaskPro Elite" className="h-full w-full object-cover" width={56} height={56} />
         </div>
         <h1 className="text-4xl font-bold md:text-6xl">TaskPro Elite</h1>
