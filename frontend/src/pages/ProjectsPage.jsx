@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import api from "../services/api";
 import { getInitials, roleLabel } from "../utils/ui";
@@ -81,23 +82,25 @@ const ProjectsPage = () => {
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {projects.map((p) => (
           <div key={p._id} className="premium-card p-4">
-            <span className="rounded-md bg-indigo-100 px-2 py-1 text-[11px] font-medium uppercase tracking-wide text-indigo-700 dark:bg-indigo-950/30 dark:text-indigo-300">Project</span>
-            <h3 className="mt-3 text-2xl font-semibold">{p.title}</h3>
-            <p className="mt-2 text-sm text-slate-500">{p.description}</p>
-            <div className="mt-6 flex items-center justify-between">
-              <div className="flex -space-x-2">
-                {(p.members || []).slice(0, 3).map((member) => (
-                  <span key={member._id} title={`${member.name} (${roleLabel(member.role)})`} className="flex h-8 w-8 items-center justify-center rounded-full border border-white bg-slate-200 text-xs font-semibold text-slate-700 dark:border-slate-900 dark:bg-slate-700 dark:text-slate-100">
-                    {getInitials(member.name)}
-                  </span>
-                ))}
+            <Link to={`/projects/${p._id}`} className="block rounded-xl outline-none ring-offset-2 transition hover:opacity-95 focus-visible:ring-2 focus-visible:ring-blue-500 dark:ring-offset-slate-900">
+              <span className="rounded-md bg-indigo-100 px-2 py-1 text-[11px] font-medium uppercase tracking-wide text-indigo-700 dark:bg-indigo-950/30 dark:text-indigo-300">Project</span>
+              <h3 className="mt-3 text-2xl font-semibold text-slate-900 dark:text-white">{p.title}</h3>
+              <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">{p.description}</p>
+              <div className="mt-6 flex items-center justify-between">
+                <div className="flex -space-x-2">
+                  {(p.members || []).slice(0, 3).map((member) => (
+                    <span key={member._id} title={`${member.name} (${roleLabel(member.role)})`} className="flex h-8 w-8 items-center justify-center rounded-full border border-white bg-slate-200 text-xs font-semibold text-slate-700 dark:border-slate-900 dark:bg-slate-700 dark:text-slate-100">
+                      {getInitials(member.name)}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-xs text-slate-500" title={(p.members || []).map((member) => member.name).join(", ")}>
+                  {p.members?.length || 0} members
+                </p>
               </div>
-              <p className="text-xs text-slate-500" title={(p.members || []).map((member) => member.name).join(", ")}>
-                {p.members?.length || 0} members
-              </p>
-            </div>
+            </Link>
             {user?.role === "admin" && (
-              <button onClick={() => removeProject(p._id)} className="mt-4 rounded-lg border border-rose-200 px-3 py-1.5 text-sm font-medium text-rose-600 hover:bg-rose-50 dark:border-rose-800 dark:text-rose-300 dark:hover:bg-rose-900/20">
+              <button type="button" onClick={() => removeProject(p._id)} className="mt-4 w-full rounded-lg border border-rose-200 px-3 py-1.5 text-sm font-medium text-rose-600 hover:bg-rose-50 dark:border-rose-800 dark:text-rose-300 dark:hover:bg-rose-900/20">
                 Delete Project
               </button>
             )}

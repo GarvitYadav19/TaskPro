@@ -30,6 +30,23 @@ const getProjects = async (req, res, next) => {
   }
 };
 
+const getProjectById = async (req, res, next) => {
+  try {
+    const project = await Project.findById(req.params.id).populate("members", "name email role");
+    if (!project) return res.status(404).json({ message: "Project not found" });
+
+    const isAllowed =
+      req.user.role === "admin" ||
+      project.members.some((m) => (m._id || m).toString() === req.user._id.toString()) ||
+      project.createdBy?.toString() === req.user._id.toString();
+    if (!isAllowed) return res.status(403).json({ message: "Forbidden" });
+
+    return res.json(project);
+  } catch (error) {
+    return next(error);
+  }
+};
+
 const updateProject = async (req, res, next) => {
   try {
     const project = await Project.findByIdAndUpdate(req.params.id, req.body, { new: true }).populate(
@@ -54,4 +71,4 @@ const deleteProject = async (req, res, next) => {
   }
 };
 
-module.exports = { createProject, getProjects, updateProject, deleteProject };
+module.exports = { createProject, getProjects, getProjectById, updateProject, deleteProject };

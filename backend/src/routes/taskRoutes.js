@@ -2,7 +2,7 @@ const express = require("express");
 const { body } = require("express-validator");
 const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
-const { createTask, getTasks, updateTask, deleteTask } = require("../controllers/taskController");
+const { createTask, getTasks, getTasksByProject, updateTask, deleteTask } = require("../controllers/taskController");
 
 const router = express.Router();
 router.use(authMiddleware);
@@ -20,6 +20,7 @@ router.post(
   ],
   createTask
 );
+router.get("/project/:projectId", getTasksByProject);
 router.get("/", getTasks);
 router.patch("/:id", updateTask);
 router.delete("/:id", roleMiddleware("admin"), deleteTask);

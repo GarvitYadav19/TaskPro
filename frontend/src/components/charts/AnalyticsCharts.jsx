@@ -11,8 +11,8 @@ const tooltipStyle = {
 
 const AnalyticsCharts = ({ stats }) => (
   <>
-    <div className="glass p-4">
-      <h3 className="mb-3 font-semibold">Weekly Productivity</h3>
+    <div className="glass p-4 ring-1 ring-slate-200/90 dark:ring-slate-700/45">
+      <h3 className="mb-3 font-semibold text-slate-900 dark:text-white">Weekly Productivity</h3>
       <div className="h-64">
         <ResponsiveContainer>
           <BarChart data={stats.weeklyProductivity}>
@@ -31,8 +31,8 @@ const AnalyticsCharts = ({ stats }) => (
         </ResponsiveContainer>
       </div>
     </div>
-    <div className="glass p-4">
-      <h3 className="mb-3 font-semibold">Status Distribution</h3>
+    <div className="glass p-4 ring-1 ring-slate-200/90 dark:ring-slate-700/45">
+      <h3 className="mb-3 font-semibold text-slate-900 dark:text-white">Status Distribution</h3>
       <div className="h-64">
         <ResponsiveContainer>
           <PieChart>

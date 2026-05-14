@@ -58,7 +58,9 @@ const AuthPage = ({ mode }) => {
     <div className="flex min-h-screen items-center justify-center p-4">
       <div className="grid w-full max-w-5xl overflow-hidden rounded-3xl border border-white/25 bg-white/45 shadow-2xl backdrop-blur-2xl dark:border-slate-700/40 dark:bg-slate-900/45 md:grid-cols-2">
         <div className="hidden bg-gradient-to-br from-[#113dd8]/95 via-blue-600/95 to-[#0d2bb6]/95 p-8 text-white md:block">
-          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 text-base font-bold shadow-lg">TP</div>
+          <div className="mb-4 flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-white/25 bg-white/15 shadow-lg">
+            <img src="/logo.png" alt="" className="h-full w-full object-cover" width={48} height={48} />
+          </div>
           <h2 className="text-4xl font-bold">TaskPro Elite</h2>
           <p className="mt-5 text-2xl font-semibold">Elevate your team’s creative flow.</p>
           <p className="mt-3 max-w-sm text-indigo-100">Join next-generation workspaces with structured execution and premium analytics.</p>
@@ -108,11 +110,22 @@ const AuthPage = ({ mode }) => {
             </div>
           </div>
         )}
-        <p className="text-sm text-slate-500">
-          {mode === "login" ? "New here?" : "Already have account?"}{" "}
-          <Link to={mode === "login" ? "/signup" : "/login"} state={{ from: location.pathname }} className="text-brand-500">
-            {mode === "login" ? "Create account" : "Login"}
-          </Link>
+        <p className="text-sm text-slate-500 dark:text-slate-400">
+          {mode === "login" ? (
+            <>
+              New here?{" "}
+              <Link to="/signup" state={{ from: location.pathname }} className="font-semibold text-brand-500">
+                Create account
+              </Link>
+            </>
+          ) : (
+            <>
+              Already have an account?{" "}
+              <Link to="/login" state={{ from: location.pathname }} className="font-semibold text-brand-500">
+                Login ( Login with demo accounts )
+              </Link>
+            </>
+          )}
         </p>
       </motion.form>
       </div>

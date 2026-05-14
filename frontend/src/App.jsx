@@ -8,6 +8,7 @@ import AuthPage from "./pages/AuthPage";
 import DashboardPage from "./pages/DashboardPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import TasksPage from "./pages/TasksPage";
+import ProjectWorkspacePage from "./pages/ProjectWorkspacePage";
 
 const App = () => (
   <ThemeProvider>
@@ -26,6 +27,7 @@ const App = () => (
           >
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/projects/:projectId" element={<ProjectWorkspacePage />} />
             <Route path="/tasks" element={<TasksPage />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />

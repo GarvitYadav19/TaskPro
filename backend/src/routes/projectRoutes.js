@@ -2,7 +2,7 @@ const express = require("express");
 const { body } = require("express-validator");
 const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
-const { createProject, getProjects, updateProject, deleteProject } = require("../controllers/projectController");
+const { createProject, getProjects, getProjectById, updateProject, deleteProject } = require("../controllers/projectController");
 
 const router = express.Router();
 
@@ -15,6 +15,7 @@ router.post(
   createProject
 );
 router.get("/", getProjects);
+router.get("/:id", getProjectById);
 router.patch("/:id", roleMiddleware("admin"), updateProject);
 router.delete("/:id", roleMiddleware("admin"), deleteProject);
 
